@@ -179,6 +179,13 @@ tr {
     color: var(--gray);
 }
 
+.button-with-image{
+    border-style: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+
 .comment-separator {
     height: 1px;
     background-color: var(--shadow);
@@ -352,13 +359,19 @@ tr {
     font-size: 20px;
 }
 
-.dropdown-content > a {
+.dropdown-content > button {
     color: black;
     font-style: normal;
     width: 100%;
     display: block;
     text-decoration: none;
     padding: 10px;
+    text-align: left;
+}
+
+.commodity-pagination{
+    display: flex;
+    justify-content: center;
 }
 
 .dropdown:hover .dropdown-content {
