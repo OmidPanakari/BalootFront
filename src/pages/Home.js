@@ -29,10 +29,15 @@ function Home() {
                     search: commodities.searchText,
                     sort: commodities.sortByName ? "name" : "price",
                     available: commodities.available
+                },
+                headers: {
+                    Authorization: localStorage.getItem("token")
+
                 }
             });
             setCommodities({...commodities, comms: temp.data.data.commodities, totalPages: temp.data.data.pageCount})
         }
+
         getComms().then(r => console.log("caught!"));
     }, [commodities.available, commodities.sortByName, commodities.searchType, commodities.searchText, commodities.currentPage]);
 
@@ -53,7 +58,7 @@ function Home() {
 
     return (
         <>
-            <Navbar setState={setCommodities} buttons = {true} search = {true}/>
+            <Navbar setState={setCommodities} buttons={true} search={true}/>
             <main>
                 <div className="container">
                     <div className="container filter-bar d-flex justify-content-between p-1 align-items-center mb-3">
@@ -79,7 +84,9 @@ function Home() {
                     </div>
                     <div className="row g-3">
                         <CommodityList commodities={commodities.comms}/>
-                        {commodities.totalPages > 1 && <Pagination className="commodity-pagination" count={commodities.totalPages} onChange={handleChangePage}/>}
+                        {commodities.totalPages > 1 &&
+                            <Pagination className="commodity-pagination" count={commodities.totalPages}
+                                        onChange={handleChangePage}/>}
 
                     </div>
                 </div>

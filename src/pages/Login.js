@@ -17,8 +17,10 @@ function Login() {
                     password: event.target.password.value
                 }
             );
-            if(temp.data.success === true)
+            if(temp.data.success === true){
+                localStorage.setItem("token", temp.data.data)
                 navigate("/");
+            }
             else
                 setError(temp.data.message);
         }
