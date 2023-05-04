@@ -2,16 +2,17 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import axios from "axios";
 import {redirect, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {DataContext} from "../App";
 
 function Login() {
-    const baseURL = "http://localhost:8080/auth/login";
+    const baseURLLogin = "http://localhost:8080/auth/login";
     const [error, setError] = useState("")
     const navigate = useNavigate();
     function handleLogin(event){
         event.preventDefault()
         async function LoginReq(){
-            let temp = await axios.post(baseURL,
+            let temp = await axios.post(baseURLLogin,
                 {
                     username: event.target.username.value,
                     password: event.target.password.value

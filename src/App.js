@@ -7,14 +7,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Protected from "./Protected";
 
-export const DataContext = createContext({login: false})
+export const DataContext = createContext({user:{}, setUser: () => {}})
 function App() {
-    const [user, setUser] = useState({isLogin:false, user:{}})
-    async function checkLogin(){
-
-    }
+    const [user, setUser] = useState(DataContext.data.user)
+    const value = { user, setUser };
     return (
-        <DataContext.Provider value={{login: false}}>
+        <DataContext.Provider value={value}>
             <BrowserRouter>
                 <Routes>
                     <Route path="/">
@@ -27,7 +25,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </DataContext.Provider>
-        
+
     );
 }
 export default App;

@@ -5,7 +5,8 @@ import {DataContext} from "./App";
 import {useContext} from "react";
 
 function Navbar(props) {
-    let value = useContext(DataContext);
+    let {user, setUser} = useContext(DataContext);
+    console.log(user)
     return (
         <header>
             <nav className="navbar shadow fixed-top px-3">
@@ -13,9 +14,14 @@ function Navbar(props) {
                     <Logo/>
                     {props.search && <Search setState={props.setState}/>}
                     {props.buttons &&
-                        <div>
-                            <Button className="nav-btn" buttonName="Register"/>
-                            <Button className="nav-btn" buttonName="Login"/>
+                        <div className="d-flex justify-content-between">
+                            <div className="mx-2 d-flex align-items-center">
+                                <p className="item-title-text">{user.username}</p>
+                            </div>
+                            <div className="d-flex justify-content-between mx-2 px-3 py-2 cart-card">
+                                <p>Cart</p>
+                                <p>{user.buyList.length}</p>
+                            </div>
                         </div>
                     }
 
