@@ -31,6 +31,7 @@ function Home() {
                     available: commodities.available
                 }
             });
+            console.log(temp.data.data.commodities)
             setCommodities({...commodities, comms: temp.data.data.commodities, totalPages: temp.data.data.pageCount})
         }
 

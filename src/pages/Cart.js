@@ -3,8 +3,12 @@ import Button from "../Button";
 import CommodityCard from "../CommodityCard";
 import Footer from "../Footer";
 import CartItem from "../CartItem";
+import {useContext} from "react";
+import {DataContext} from "../App";
+import CartList from "../CartList";
 
 function Cart() {
+    let {user, setUser} = useContext(DataContext);
     return (
         <>
             <Navbar/>
@@ -13,16 +17,14 @@ function Cart() {
                     <div className="row shadow mb-5">
                         <div className="col-12 col-sm-6">
                             <ul>
-                                <li className="profile-info item-title-text username"> Marshall</li>
-                                <li className="profile-info item-title-text email"> Marshall.Mathers@gmail.com</li>
-                                <li className="profile-info item-title-text date"> 1972/10/17</li>
-                                <li className="profile-info item-title-text location"> 20785 Schultes Avenue, Warren, Ml
-                                    48092
-                                </li>
+                                <li className="profile-info item-title-text username"> {user.username}</li>
+                                <li className="profile-info item-title-text email"> {user.email}</li>
+                                <li className="profile-info item-title-text date"> {user.birthDate}</li>
+                                <li className="profile-info item-title-text location"> {user.address}</li>
                             </ul>
                         </div>
                         <div className="col-12 col-sm-6">
-                            <h1 className="price-title"><span className="price-sign">$</span>10000000</h1>
+                            <h1 className="price-title"><span className="price-sign">$</span>{user.credit}</h1>
                             <form className="w-100">
                                 <label className="py-1 w-100">
                                     <input className="form-control w-100 add-credit-input text-center" type="text"
@@ -51,8 +53,7 @@ function Cart() {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr className="item-separator"></tr>
-                        <CartItem/>
+                        <CartList commodities = {user.buyList} purchased = {false}/>
                         </tbody>
                     </table>
                     <div className="d-flex justify-content-center">
@@ -76,10 +77,7 @@ function Cart() {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr className="item-separator"></tr>
-                        <CartItem/>
-                        <tr className="item-separator"></tr>
-                        <CartItem/>
+                        <CartList commodities = {user.purchased} purchased = {true}/>
                         </tbody>
                     </table>
                 </div>
