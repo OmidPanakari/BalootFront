@@ -1,5 +1,4 @@
 import Navbar from "../Navbar";
-import Button from "../Button";
 import CommodityCard from "../CommodityCard";
 import Footer from "../Footer";
 import CartItem from "../CartItem";

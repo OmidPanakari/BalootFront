@@ -1,4 +1,4 @@
-import Button from "./Button";
+import CommodityButton from "./CommodityButton";
 
 function CommodityCard(props){
     return(
@@ -10,7 +10,7 @@ function CommodityCard(props){
                     <img className="w-100" src = {props.commodity.image} alt="thumbnail"></img>
                     <div className="d-flex justify-content-between align-items-center">
                         <h2 className="item-price-text">{props.commodity.price}$</h2>
-                        <Button className = "white-button" type = "submit" buttonName = "add to cart"/>
+                        <CommodityButton/>
                     </div>
                 </div>
             </div>

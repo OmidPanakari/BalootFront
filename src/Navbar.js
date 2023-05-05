@@ -1,4 +1,3 @@
-import Button from "./Button";
 import Logo from "./Logo";
 import Search from "./Search";
 import {DataContext} from "./App";
