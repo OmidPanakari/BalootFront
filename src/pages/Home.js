@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import CommodityList from "../CommodityList";
 import {Pagination} from "@mui/material";
+import {apiService} from "../services/apiService";
 
 function Home() {
     const baseURL = "http://localhost:8080/commodities";
@@ -21,18 +22,18 @@ function Home() {
 
     useEffect(() => {
         async function getComms() {
-            let temp = await axios.get(baseURL, {
-                params: {
+            let temp = await apiService.getRequest("/commodities",
+                {
                     page: commodities.currentPage,
                     limit: 12,
                     searchType: commodities.searchType,
                     search: commodities.searchText,
                     sort: commodities.sortByName ? "name" : "price",
                     available: commodities.available
-                }, headers: {Authorization : localStorage.getItem("token")}
-            });
-            console.log(temp.data.data.commodities)
-            setCommodities({...commodities, comms: temp.data.data.commodities, totalPages: temp.data.data.pageCount})
+                }
+            );
+            console.log(temp)
+            setCommodities({...commodities, comms: temp.data.commodities, totalPages: temp.data.pageCount})
         }
 
         getComms().then(r => console.log("caught!"));
