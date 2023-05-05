@@ -9,7 +9,7 @@ function CommodityInfo(props) {
     const {commodity, inCart} = props;
     const [userRating, setUserRating] = useState(0);
     const addRating = async () => {
-        const response = await apiService.postRequest(`/commodities/${commodity.id}/ratings`, {userRating});
+        const response = await apiService.postRequest(`/commodities/${commodity.id}/ratings`, {rate: userRating});
         if (!response.success) {
             alert(response.message);
         }
