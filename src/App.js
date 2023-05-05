@@ -7,11 +7,15 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Protected from "./Protected";
 import axios from "axios";
-import {CircularProgress} from "@mui/material";
+import {Alert, CircularProgress, Snackbar} from "@mui/material";
 
 export const DataContext = createContext({
     user: {}, setUser: () => {
     }
+})
+
+export const AlertContext = createContext({
+    sendAlert: () => {}
 })
 
 function App() {
@@ -19,6 +23,16 @@ function App() {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState({})
     const value = {user, setUser};
+    const [alertState, setAlertState] = useState({open: false, message: ""})
+    const sendAlert = (message) => {
+        setAlertState({open: true, message});
+    }
+    const handleClose = (e, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setAlertState({open: false, message: ""});
+    }
     async function AuthReq() {
         setLoading(true);
         let temp = await axios.get(baseURLAuth, {headers: {Authorization : localStorage.getItem("token")}}).catch((error) => {
@@ -35,20 +49,27 @@ function App() {
     }, [])
 
     return (
-        <DataContext.Provider value={value}>
-            {loading ? <CircularProgress/> :
-                <BrowserRouter>
-                    <Routes>
-                        <Route path="/">
-                            <Route index element={<Protected><Home/></Protected>}/>
-                            <Route path={"Commodity/:id"} element={<Protected><Commodity/></Protected>}/>
-                            <Route path={"Cart"} element={<Protected><Cart/></Protected>}/>
-                            <Route path={"Login"} element={<Login/>}/>
-                            <Route path={"Signup"} element={<Signup/>}/>
-                        </Route>
-                    </Routes>
-                </BrowserRouter>}
-        </DataContext.Provider>
+        <AlertContext.Provider value={{sendAlert}}>
+            <DataContext.Provider value={value}>
+                {loading ? <CircularProgress/> :
+                    <BrowserRouter>
+                        <Routes>
+                            <Route path="/">
+                                <Route index element={<Protected><Home/></Protected>}/>
+                                <Route path={"Commodity/:id"} element={<Protected><Commodity/></Protected>}/>
+                                <Route path={"Cart"} element={<Protected><Cart/></Protected>}/>
+                                <Route path={"Login"} element={<Login/>}/>
+                                <Route path={"Signup"} element={<Signup/>}/>
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>}
+                <Snackbar open={alertState.open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                        {alertState.message}
+                    </Alert>
+                </Snackbar>
+            </DataContext.Provider>
+        </AlertContext.Provider>
 
     );
 }

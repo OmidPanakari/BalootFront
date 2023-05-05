@@ -119,7 +119,7 @@ tr {
 
 .item-price-text {
     font-weight: 600;
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: var(--darkBrown);
 }
 
@@ -397,6 +397,11 @@ tr {
     box-shadow: 0 4px 4px rgba(208, 208, 208, 0.25);
 }
 
+.item-card:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 3px var(--gray) !important;
+}
+
 #avl-check {
     display: none;
     width: 50px;
@@ -426,6 +431,10 @@ tr {
 
 .item-image {
     max-width: 70px;
+}
+
+.com-item-image {
+    aspect-ratio: 1/1;
 }
 
 .item-separator {

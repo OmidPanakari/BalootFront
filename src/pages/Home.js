@@ -1,6 +1,5 @@
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-import Button from "../Button";
 import CommodityCard from "../CommodityCard";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -71,12 +70,12 @@ function Home() {
                             <input type="radio" name="sort-option" id="sort-name" className="radio-button"
                                    onChange={sortChange} checked={commodities.sortByName}></input>
                             <label className="p-2 item-title-text" htmlFor="sort-name">
-                                <Button buttonName="name" className=""/>
+                                <button buttonName="name" className=""/>
                             </label>
                             <input type="radio" name="sort-option" id="sort-price" className="radio-button"
                                    onChange={sortChange} checked={!commodities.sortByName}></input>
                             <label className="p-2 item-title-text" htmlFor="sort-price">
-                                <Button buttonName="price" className=""/>
+                                <button buttonName="price" className=""/>
                             </label>
                         </div>
                     </div>

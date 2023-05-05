@@ -4,7 +4,7 @@ function CommodityList(props){
     return(
         <>
             {props.commodities.map(function(object, i){
-                return <CommodityCard commodity ={object.commodity} />;
+                return <CommodityCard inCart={object.inCart} commodity ={object.commodity} />;
             })}
         </>
     )
