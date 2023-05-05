@@ -29,7 +29,7 @@ function Home() {
                     search: commodities.searchText,
                     sort: commodities.sortByName ? "name" : "price",
                     available: commodities.available
-                }
+                }, headers: {Authorization : localStorage.getItem("token")}
             });
             console.log(temp.data.data.commodities)
             setCommodities({...commodities, comms: temp.data.data.commodities, totalPages: temp.data.data.pageCount})

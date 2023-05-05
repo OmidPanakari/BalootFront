@@ -7,8 +7,10 @@ import {DataContext} from "../App";
 
 function Login() {
     const baseURLLogin = "http://localhost:8080/auth/login";
+    const baseURLAuth = "http://localhost:8080/auth/";
     const [error, setError] = useState("")
     const navigate = useNavigate();
+    const {user, setUser} = useContext(DataContext)
     function handleLogin(event){
         event.preventDefault()
         async function LoginReq(){
@@ -20,10 +22,12 @@ function Login() {
             );
             if(temp.data.success === true){
                 localStorage.setItem("token", temp.data.data)
-                navigate("/");
-            }
-            else
-                setError(temp.data.message);
+                let temp2 = await axios.get(baseURLAuth, {headers: {Authorization : localStorage.getItem("token")}});
+                if (temp2.data.success === true) {
+                    setUser(temp2.data.data.data);
+                    navigate("/");
+                } else setError(temp2.data.message);
+            } else setError(temp.data.message);
         }
         LoginReq();
 

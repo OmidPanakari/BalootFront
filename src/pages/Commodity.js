@@ -4,6 +4,7 @@ import CommodityCard from "../CommodityCard";
 import Comment from "../Comment";
 import Star from "../Images/star.png"
 import Thumbnail from "../Images/thumbnail.png"
+import {useParams} from "react-router-dom";
 
 function Commodity() {
     return (

@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 import Home from "./pages/Home";
 import {createContext, useEffect, useState} from "react";
 import Commodity from "./pages/Commodity";
@@ -19,15 +19,18 @@ function App() {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState({})
     const value = {user, setUser};
-    useEffect(() => {
-        async function AuthReq() {
-            setLoading(true);
-            let temp = await axios.get(baseURLAuth);
-            if (temp.data.success === true) {
-                setUser(temp.data.data.data);
-                setLoading(false)
-            }
+    async function AuthReq() {
+        setLoading(true);
+        let temp = await axios.get(baseURLAuth, {headers: {Authorization : localStorage.getItem("token")}}).catch((error) => {
+            localStorage.removeItem("token")
+            setLoading(false)
+        });
+        if (temp.data.success === true) {
+            setUser(temp.data.data.data);
+            setLoading(false)
         }
+    }
+    useEffect(() => {
         AuthReq()
     }, [])
 
@@ -38,14 +41,13 @@ function App() {
                     <Routes>
                         <Route path="/">
                             <Route index element={<Protected><Home/></Protected>}/>
-                            <Route path={"Commodity"} element={<Protected><Commodity/></Protected>}/>
+                            <Route path={"Commodity/:id"} element={<Protected><Commodity/></Protected>}/>
                             <Route path={"Cart"} element={<Protected><Cart/></Protected>}/>
                             <Route path={"Login"} element={<Login/>}/>
                             <Route path={"Signup"} element={<Signup/>}/>
                         </Route>
                     </Routes>
                 </BrowserRouter>}
-
         </DataContext.Provider>
 
     );
