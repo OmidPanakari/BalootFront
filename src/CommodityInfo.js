@@ -3,11 +3,15 @@ import Star from "./Images/star.png";
 import CommodityButton from "./CommodityButton";
 import {Rating} from "@mui/material";
 import {apiService} from "./services/apiService";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function CommodityInfo(props) {
     const {commodity, inCart} = props;
     const [userRating, setUserRating] = useState(0);
+    const [inStock, setInStock] = useState(0)
+    useEffect(() => {
+        setInStock(props.commodity.inStock)
+    }, [props.commodity])
     const addRating = async () => {
         const response = await apiService.postRequest(`/commodities/${commodity.id}/ratings`, {rate: userRating});
         if (!response.success) {
@@ -22,7 +26,7 @@ function CommodityInfo(props) {
             <div className="col-lg-6 col-sm-12">
                 <strong className="title-text">{commodity.name}</strong>
                 <div className="d-flex justify-content-between align-items-center">
-                    <h3 className="stock-text">{commodity.inStock} in stock</h3>
+                    <h3 className="stock-text">{inStock} in stock</h3>
                     <div className="d-flex align-items-baseline">
                         <img className="rating" src={Star} alt="rate"/>
                         <p className="filter-text">{commodity.rating}</p>
@@ -38,7 +42,7 @@ function CommodityInfo(props) {
                 </ul>
                 <div className="price-card d-flex justify-content-between align-items-center shadow p-3">
                     <h2 className="price-text px-4 py-2">{commodity.price}$</h2>
-                    <CommodityButton count={inCart} commodity={commodity}/>
+                    <CommodityButton setInStock = {setInStock} count={inCart} commodity={commodity}/>
                 </div>
                 <div className="d-flex justify-content-between align-items-center p-3 m-3">
                     <div>

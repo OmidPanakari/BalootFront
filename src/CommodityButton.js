@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {apiService} from "./services/apiService";
 import {DataContext} from "./App";
+import {useNavigate} from "react-router-dom";
 
 function addToBuyList(currBuyList, item){
     let temp = false;
@@ -25,8 +26,10 @@ function removeFromBuyList(currBuyList, item){
 
 function CommodityButton(props){
     const [count, setCount] = useState(0);
+    const [stock, setStock] = useState(0);
     useEffect(() => {
         setCount(props.count)
+        setStock(props.commodity.inStock)
     }, [props.commodity])
     const {user, setUser} = useContext(DataContext)
     const addToCart = async (e) => {
@@ -43,6 +46,9 @@ function CommodityButton(props){
             alert(resp.message);
             removeFromBuyList(tempList, props.commodity)
             setCount((prev) => prev - 1);
+        } else {
+            props.setInStock(resp.data)
+            setStock(resp.data)
         }
     }
     const removeFromCart = async (e) => {
@@ -60,17 +66,20 @@ function CommodityButton(props){
             setCount((prev) => prev + 1);
             addToBuyList(tempList, props.commodity)
             setUser({...user, buyList: tempList})
+        } else {
+            props.setInStock(resp.data)
+            setStock(resp.data)
         }
     }
     if (count === 0) {
-        return (<button disabled={props.commodity.inStock === 0} onClick={addToCart} className="white-button">add to cart</button>);
+        return (<button disabled={stock === 0} onClick={addToCart} className="white-button">add to cart</button>);
     }
     else {
         return (
         <div className="d-flex justify-content-between py-2 px-3 input-number">
             <button onClick={removeFromCart} className="adjust-btn">-</button>
             <p>{count}</p>
-            <button disabled={props.commodity.inStock === 0} onClick={addToCart} className="adjust-btn">+</button>
+            <button disabled={stock === 0} onClick={addToCart} className="adjust-btn">+</button>
         </div>
         );
     }

@@ -3,14 +3,25 @@ import CommodityCard from "../CommodityCard";
 import Footer from "../Footer";
 import CartItem from "../CartItem";
 import {useContext} from "react";
-import {DataContext} from "../App";
+import {AlertContext, DataContext} from "../App";
 import CartList from "../CartList";
+import {apiService} from "../services/apiService";
 
 function Cart() {
+    const {sendAlert} = useContext(AlertContext);
     let {user, setUser} = useContext(DataContext);
+    async function addCredit(event){
+        event.preventDefault();
+        setUser({...user, credit: user.credit + Number(event.target.amount.value)})
+        const res = await apiService.putRequest("/users/credit", {credit: event.target.amount.value})
+        if (!res.success){
+            sendAlert(res.message);
+            setUser({...user, credit: user.credit - Number(event.target.amount.value)})
+        }
+    }
     return (
         <>
-            <Navbar/>
+            <Navbar buttons = {true}/>
             <main>
                 <div className="container">
                     <div className="row shadow mb-5">
@@ -24,12 +35,12 @@ function Cart() {
                         </div>
                         <div className="col-12 col-sm-6">
                             <h1 className="price-title"><span className="price-sign">$</span>{user.credit}</h1>
-                            <form className="w-100">
+                            <form className="w-100" onSubmit={addCredit}>
                                 <label className="py-1 w-100">
-                                    <input className="form-control w-100 add-credit-input text-center" type="text"
+                                    <input name="amount" className="form-control w-100 add-credit-input text-center" type="text"
                                            placeholder="$Amount"/>
                                 </label>
-                                <button className="brown-btn my-2 w-100">Add More Credit</button>
+                                <button type="submit" className="brown-btn my-2 w-100">Add More Credit</button>
                             </form>
                         </div>
                     </div>
