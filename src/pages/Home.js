@@ -70,12 +70,12 @@ function Home() {
                             <input type="radio" name="sort-option" id="sort-name" className="radio-button"
                                    onChange={sortChange} checked={commodities.sortByName}></input>
                             <label className="p-2 item-title-text" htmlFor="sort-name">
-                                <button buttonName="name" className=""/>
+                                <button className="">name</button>
                             </label>
                             <input type="radio" name="sort-option" id="sort-price" className="radio-button"
                                    onChange={sortChange} checked={!commodities.sortByName}></input>
                             <label className="p-2 item-title-text" htmlFor="sort-price">
-                                <button buttonName="price" className=""/>
+                                <button className="">price</button>
                             </label>
                         </div>
                     </div>

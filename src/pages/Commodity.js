@@ -72,7 +72,7 @@ function Commodity() {
         <>
             {loading ? <CircularProgress/> :
                 <div>
-                    <Navbar/>
+                    <Navbar buttons = {true}/>
                     <main>
                         <div className="container">
                             <CommodityInfo commodity={commodity.commodity} inCart={commodity.inCart}/>

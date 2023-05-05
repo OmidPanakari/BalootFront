@@ -38,7 +38,7 @@ function CommodityInfo(props) {
                 </ul>
                 <div className="price-card d-flex justify-content-between align-items-center shadow p-3">
                     <h2 className="price-text px-4 py-2">{commodity.price}$</h2>
-                    <CommodityButton count={inCart} commodityId={commodity.id}/>
+                    <CommodityButton count={inCart} commodity={commodity}/>
                 </div>
                 <div className="d-flex justify-content-between align-items-center p-3 m-3">
                     <div>

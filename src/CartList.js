@@ -1,5 +1,5 @@
 import CartItem from "./CartItem";
-import CommodityCard from "./CommodityCard";
+
 
 function CartList(props){
     return(
@@ -8,7 +8,7 @@ function CartList(props){
                 return (
                     <>
                         <tr className="item-separator"></tr>
-                        <CartItem commodity = {object} purchased ={props.purchased}/>
+                        <CartItem inCart = {object.inCart} commodity = {object.commodity} purchased ={props.purchased}/>
                     </>
             );
             })}

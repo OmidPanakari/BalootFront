@@ -3,9 +3,15 @@ import Search from "./Search";
 import {DataContext} from "./App";
 import {useContext} from "react";
 
+function calculateItemsCount(buyList){
+    let temp = 0;
+    buyList.map((object, i) => {
+        temp += object.inCart;
+    })
+    return temp;
+}
 function Navbar(props) {
     let {user, setUser} = useContext(DataContext);
-    console.log(user)
     return (
         <header>
             <nav className="navbar shadow fixed-top px-3">
@@ -19,7 +25,7 @@ function Navbar(props) {
                             </div>
                             <div className="d-flex justify-content-between mx-2 px-3 py-2 cart-card">
                                 <p>Cart</p>
-                                <p>{user.buyList.length}</p>
+                                <p>{calculateItemsCount(user.buyList)}</p>
                             </div>
                         </div>
                     }

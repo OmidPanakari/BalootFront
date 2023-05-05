@@ -41,6 +41,7 @@ function App() {
         });
         if (temp.data.success === true) {
             setUser(temp.data.data.data);
+            console.log(temp.data.data.data)
             setLoading(false)
         }
     }

@@ -15,7 +15,7 @@ function CommodityCard(props){
                     <img className="w-100 pb-2 com-item-image" src = {props.commodity.image} alt="thumbnail"></img>
                     <div className="d-flex justify-content-between align-items-center">
                         <h2 className="item-price-text">{props.commodity.price}$</h2>
-                        <CommodityButton count={props.inCart} commodityId={props.commodity.id}/>
+                        <CommodityButton count={props.inCart} commodity={props.commodity}/>
                     </div>
                 </div>
             </div>

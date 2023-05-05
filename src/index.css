@@ -435,6 +435,7 @@ tr {
 
 .com-item-image {
     aspect-ratio: 1/1;
+    object-fit: contain;
 }
 
 .item-separator {
@@ -478,6 +479,12 @@ tr {
     border-style: solid;
     display: inline;
 }
+
+.white-button:disabled{
+    color: gray;
+    border-color: gray;
+}
+
 
 .brown-btn {
     border-color: var(--darkBrown);
@@ -541,7 +548,7 @@ li.profile-info {
     background-image: url("Images/location.svg");
 }
 
-button.white-button:hover {
+button.white-button:hover:enabled{
     background-color: var(--darkBrown);
     color: var(--white);
 }
