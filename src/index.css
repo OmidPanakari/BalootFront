@@ -192,6 +192,28 @@ tr {
     width: 100%;
 }
 
+.buy-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    background-color: var(--white);
+    border-radius: 4px;
+}
+
+.factor-title {
+    font-size: 1.2rem;
+}
+
+.factor-item {
+    color: var(--darkBrown);
+}
+
+.factor-price {
+    color: var(--brown);
+}
+
 .provider-text {
     font-weight: 600;
     font-size: 1.4rem;
@@ -246,6 +268,14 @@ tr {
     font-size: 1.2rem;
 }
 
+.cart-card-empty:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--brown);
+    color: var(--creme);
+    box-shadow: 0 3px 5px var(--shadow);
+}
+
 .cart-card {
     color: var(--creme);
     background-color: var(--darkBrown);
@@ -253,6 +283,17 @@ tr {
     min-width: 7rem;
     font-weight: 600;
     font-size: 1.2rem;
+}
+
+.cart-card:hover {
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: var(--brown);
+    box-shadow: 0 3px 5px var(--darkBrown);
+}
+
+.logo-container:hover {
+    cursor: pointer;
 }
 
 .rating {
@@ -297,7 +338,7 @@ tr {
 
 .search-bar-div {
     border-style: none;
-    width: 7rem;
+    width: 8rem;
     background-color: var(--darkCreme);
     border-radius: 10px;
     padding: 10px;
@@ -503,6 +544,24 @@ tr {
     background-color: var(--brown);
     box-shadow: 0 3px 5px var(--darkBrown);
     color: var(--white);
+}
+
+.red-btn {
+    border: none;
+    background-color: var(--white);
+    color: var(--red);
+    font-size: 1rem;
+    padding: 5px 20px;
+    display: block;
+    box-shadow: none;
+}
+
+.red-btn:hover {
+    border-color: var(--red);
+    background-color: var(--red);
+    box-shadow: 0 3px 5px var(--darkBrown);
+    color: var(--white);
+    border-radius: 10px;
 }
 
 .signup-btn {

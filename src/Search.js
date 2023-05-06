@@ -19,11 +19,15 @@ function Search(props) {
     return (
         <div className="p-0 search-bar d-flex justify-content-between">
             <div className="dropdown">
-                <div className="search-bar-div d-flex justify-content-between align-items-center">
-                    <p className="search-bar-btn search-bar-btn-text">
-                        {search.type}
-                    </p>
-                    <img className="arrow" src={arrowDown} alt="arrow"></img>
+                <div className="search-bar-div d-flex justify-content-between align-items-center p-1">
+                    <div className="mx-1">
+                        <p className="search-bar-btn search-bar-btn-text">
+                            {search.type}
+                        </p>
+                    </div>
+                    <div className="me-2">
+                        <img className="arrow" src={arrowDown} alt="arrow"></img>
+                    </div>
                 </div>
                 <div className="dropdown-content">
                     <button className="search-bar-btn-text" onClick={() => changeSearchType("name")}>name</button>

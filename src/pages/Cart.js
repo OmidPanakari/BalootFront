@@ -1,15 +1,23 @@
 import Navbar from "../Navbar";
-import CommodityCard from "../CommodityCard";
 import Footer from "../Footer";
-import CartItem from "../CartItem";
-import {useContext} from "react";
 import {AlertContext, DataContext} from "../App";
+import {useContext, useState} from "react";
 import CartList from "../CartList";
 import {apiService} from "../services/apiService";
+import BuyModal from "../BuyModal";
 
 function Cart() {
     const {sendAlert} = useContext(AlertContext);
     let {user, setUser} = useContext(DataContext);
+    const [open, setOpen] = useState(false);
+
+    const showFactor = () => {
+        setOpen(true);
+    }
+
+    const closeFactor = () => {
+        setOpen(false);
+    }
     async function addCredit(event){
         event.preventDefault();
         setUser({...user, credit: user.credit + Number(event.target.amount.value)})
@@ -67,7 +75,7 @@ function Cart() {
                         </tbody>
                     </table>
                     <div className="d-flex justify-content-center">
-                        <button className="brown-btn my-2 w-50">Pay</button>
+                        <button className="brown-btn my-2 w-50" onClick={showFactor}>Pay</button>
                     </div>
                     <div className="w-100 my-4">
                         <h2 className="cart-title"><img className="cart-icon me-1" src="Images/history.svg"
@@ -91,6 +99,7 @@ function Cart() {
                         </tbody>
                     </table>
                 </div>
+                <BuyModal open={open} buyList={user.buyList} close={closeFactor}/>
             </main>
             <Footer/>
         </>

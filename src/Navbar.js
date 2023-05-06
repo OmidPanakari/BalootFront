@@ -2,6 +2,7 @@ import Logo from "./Logo";
 import Search from "./Search";
 import {DataContext} from "./App";
 import {useContext} from "react";
+import {useNavigate} from "react-router-dom";
 
 function calculateItemsCount(buyList){
     let temp = 0;
@@ -12,6 +13,7 @@ function calculateItemsCount(buyList){
 }
 function Navbar(props) {
     let {user, setUser} = useContext(DataContext);
+    const navigate = useNavigate();
     return (
         <header>
             <nav className="navbar shadow fixed-top px-3">
@@ -23,7 +25,8 @@ function Navbar(props) {
                             <div className="mx-2 d-flex align-items-center">
                                 <p className="item-title-text">{user.username}</p>
                             </div>
-                            <div className="d-flex justify-content-between mx-2 px-3 py-2 cart-card">
+                            <div onClick={() => navigate("/cart")}
+                                 className={`d-flex justify-content-between mx-2 px-3 py-2 cart-card${calculateItemsCount(user.buyList) === 0 ? "-empty" : ""}`}>
                                 <p>Cart</p>
                                 <p>{calculateItemsCount(user.buyList)}</p>
                             </div>
