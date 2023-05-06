@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Protected from "./Protected";
 import axios from "axios";
 import {Alert, CircularProgress, Snackbar} from "@mui/material";
+import Provider from "./pages/Provider";
 
 export const DataContext = createContext({
     user: {}, setUser: () => {
@@ -58,6 +59,7 @@ function App() {
                             <Route path="/">
                                 <Route index element={<Protected><Home/></Protected>}/>
                                 <Route path={"Commodity/:id"} element={<Protected><Commodity/></Protected>}/>
+                                <Route path={"Provider/:id"} element={<Protected><Provider/></Protected>}/>
                                 <Route path={"Cart"} element={<Protected><Cart/></Protected>}/>
                                 <Route path={"Login"} element={<Login/>}/>
                                 <Route path={"Signup"} element={<Signup/>}/>
