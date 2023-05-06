@@ -1,9 +1,9 @@
-import Navbar from "../Navbar";
-import Footer from "../Footer";
-import CommodityCard from "../CommodityCard";
+import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
+import CommodityCard from "../components/CommodityCard";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import CommodityList from "../CommodityList";
+import CommodityList from "../components/CommodityList";
 import {Pagination} from "@mui/material";
 import {apiService} from "../services/apiService";
 

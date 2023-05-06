@@ -1,9 +1,9 @@
-import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 import axios from "axios";
 import {redirect, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
-import {DataContext} from "../App";
+import {DataContext} from "../context/DataContext";
 
 function Login() {
     const baseURLLogin = "http://localhost:8080/auth/login";
@@ -45,7 +45,7 @@ function Login() {
 
                                         <form className="pb-2" onSubmit={event => handleLogin(event)}>
 
-                                            <img className="pb-3 logo" src={require("../Images/Logo.png")} alt="logo"/>
+                                            <img className="pb-3 logo" src={require("../assets/images/Logo.png")} alt="logo"/>
                                             <p className="item-title-text pb-2">Sign into your account</p>
 
                                             <div className="form-outline mb-2">

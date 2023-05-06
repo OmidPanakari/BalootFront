@@ -8,8 +8,8 @@ const api = axios.create({baseURL: apiURL});
 api.interceptors.response.use(
     (res) => res.data,
     (err) => {
-        alert(err);
-        window.location.href = "/login";
+        console.log(err);
+        window.location.reload();
         return Promise.reject(err);
     }
 );

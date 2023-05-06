@@ -1,14 +1,15 @@
-import Thumbnail from "./Images/thumbnail.png"
 import CommodityButton from "./CommodityButton";
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function CartItem(props) {
-    const [inStock, setInStock] = useState(0)
+    const [inStock, setInStock] = useState(0);
+    const navigate = useNavigate();
     useEffect(() => {
         setInStock(props.commodity.inStock)
     }, [props.commodity, props.inCart])
     return (
-        <tr className="shadow">
+        <tr className="shadow cart-row" onClick={() => navigate(`/Commodity/${props.commodity.id}`)}>
             <td scope="row"><img className="item-image" src={props.commodity.image} alt="commodity-image"/>
             </td>
             <td>{props.commodity.name}</td>

@@ -1,16 +1,13 @@
-import Navbar from "../Navbar";
-import Footer from "../Footer";
-import CommodityCard from "../CommodityCard";
-import Comment from "../Comment";
-import Star from "../Images/star.png"
-import Thumbnail from "../Images/thumbnail.png"
+import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
+import Comment from "../components/Comment";
 import {useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {apiService} from "../services/apiService";
 import {CircularProgress} from "@mui/material";
-import CommodityList from "../CommodityList";
-import CommodityInfo from "../CommodityInfo";
-import {AlertContext} from "../App";
+import CommodityList from "../components/CommodityList";
+import CommodityInfo from "../components/CommodityInfo";
+import {AlertContext} from "../context/AlertContext";
 
 function Commodity() {
     const {id} = useParams();

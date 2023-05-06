@@ -1,11 +1,11 @@
-import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 import {useParams} from "react-router-dom";
 import {useContext, useEffect, useState} from "react";
 import {CircularProgress} from "@mui/material";
 import {apiService} from "../services/apiService";
-import {AlertContext} from "../App";
-import CommodityList from "../CommodityList";
+import CommodityList from "../components/CommodityList";
+import {AlertContext} from "../context/AlertContext";
 
 function Provider(){
     const {id} = useParams();

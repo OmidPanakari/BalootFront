@@ -1,4 +1,4 @@
-import arrowDown from "./Images/arrowDown.png"
+import arrowDown from "../assets/images/arrowDown.png"
 import {useState} from "react";
 
 function Search(props) {
@@ -32,10 +32,11 @@ function Search(props) {
                 <div className="dropdown-content">
                     <button className="search-bar-btn-text" onClick={() => changeSearchType("name")}>name</button>
                     <button className="search-bar-btn-text" onClick={() => changeSearchType("category")}>category</button>
+                    <button className="search-bar-btn-text" onClick={() => changeSearchType("provider")}>provider</button>
                 </div>
             </div>
             <input className="search-bar-text p-3" type="text" placeholder="Search your product..." onChange={value => textChange(value.target.value)}></input>
-            <button className= "button-with-image" onClick={searchClicked}><img className="search-img" src={require("./Images/Search.png")} alt="search"/></button>
+            <button className= "button-with-image" onClick={searchClicked}><img className="search-img" src={require("../assets/images/Search.png")} alt="search"/></button>
         </div>
     )
 }

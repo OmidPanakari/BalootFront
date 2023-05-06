@@ -1,5 +1,5 @@
-import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Navbar from "../layouts/Navbar";
+import Footer from "../layouts/Footer";
 import axios from "axios";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -42,7 +42,7 @@ function Signup() {
 
                                         <form className="pb-2" onSubmit={event => handleSignup(event)}>
 
-                                            <img className="pb-3 logo" src={require("../Images/Logo.png")} alt="logo"/>
+                                            <img className="pb-3 logo" src={require("../assets/images/Logo.png")} alt="logo"/>
                                             <p className="item-title-text pb-2">Sign up</p>
 
                                             <div

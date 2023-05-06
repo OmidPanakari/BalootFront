@@ -5,19 +5,13 @@ import Commodity from "./pages/Commodity";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Protected from "./Protected";
+import Protected from "./components/Protected";
 import axios from "axios";
 import {Alert, CircularProgress, Snackbar} from "@mui/material";
 import Provider from "./pages/Provider";
-
-export const DataContext = createContext({
-    user: {}, setUser: () => {
-    }
-})
-
-export const AlertContext = createContext({
-    sendAlert: () => {}
-})
+import {DataContext} from "./context/DataContext";
+import {AlertContext} from "./context/AlertContext";
+import NotFound from "./pages/NotFound";
 
 function App() {
     const baseURLAuth = "http://localhost:8080/auth/";
@@ -64,6 +58,7 @@ function App() {
                                 <Route path={"Login"} element={<Login/>}/>
                                 <Route path={"Signup"} element={<Signup/>}/>
                             </Route>
+                            <Route path="*" element={<NotFound/>}/>
                         </Routes>
                     </BrowserRouter>}
                 <Snackbar open={alertState.open} autoHideDuration={6000} onClose={handleClose}>

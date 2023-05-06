@@ -1,8 +1,8 @@
-import Like from "./Images/like.svg"
-import Dislike from "./Images/dislike.svg"
+import Like from "../assets/images/like.svg"
+import Dislike from "../assets/images/dislike.svg"
 import {useContext, useEffect, useState} from "react";
-import {apiService} from "./services/apiService";
-import {AlertContext} from "./App";
+import {apiService} from "../services/apiService";
+import {AlertContext} from "../context/AlertContext";
 
 function Comment(props){
     const {comment} = props;

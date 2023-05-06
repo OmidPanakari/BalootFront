@@ -1,4 +1,4 @@
-@import url('./normalize.css');
+@import url('../normalize.css');
 
 :root {
     --creme: #f7f0e9;
@@ -36,7 +36,8 @@ footer {
 main {
     padding-top: 100px;
     padding-bottom: 20px;
-    flex: 1 0 auto
+    flex: 1 0 auto;
+    min-height: 96vh;
 }
 
 body {
@@ -82,6 +83,11 @@ tr {
     box-shadow: 0 4px 4px var(--shadow) !important;
 }
 
+.cart-row:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 3px var(--gray) !important;
+}
+
 .logo {
     height: auto;
     max-width: 70px;
@@ -103,6 +109,10 @@ tr {
     font-weight: 600;
     font-size: 1.2rem;
     color: var(--darkBrown);
+}
+
+.item-title-text:hover {
+    cursor: pointer;
 }
 
 .item-stock-text {
@@ -197,7 +207,7 @@ tr {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 360px;
+    width: 400px;
     background-color: var(--white);
     border-radius: 4px;
 }
@@ -226,6 +236,11 @@ tr {
 
 .remaining-text {
     color: var(--red);
+}
+
+.remaining-text-crossed {
+    text-decoration: line-through;
+    color: var(--brown);
 }
 
 .category-text {
@@ -456,7 +471,7 @@ tr {
 #avl-check + label {
     width: 50px;
     height: 25px;
-    background: url("Images/ToggleOff.png") no-repeat;
+    background: url("images/ToggleOff.png") no-repeat;
     display: inline-block;
     background-size: contain;
 }
@@ -464,7 +479,7 @@ tr {
 #avl-check:checked + label {
     width: 50px;
     height: 25px;
-    background: url("Images/ToggleOn.png") no-repeat;
+    background: url("images/ToggleOn.png") no-repeat;
     background-size: contain;
 }
 
@@ -476,11 +491,17 @@ tr {
 
 .item-image {
     max-width: 70px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
 }
 
 .com-item-image {
     aspect-ratio: 1/1;
     object-fit: contain;
+}
+
+.confirm-text {
+    color: var(--darkBrown);
 }
 
 .provider-image {
@@ -546,7 +567,7 @@ tr {
 }
 
 
-.brown-btn {
+.brown-btn:enabled {
     border-color: var(--darkBrown);
     background-color: var(--darkBrown);
     color: var(--white);
@@ -558,7 +579,19 @@ tr {
     box-shadow: none;
 }
 
-.brown-btn:hover {
+.brown-btn:disabled {
+    border-color: var(--darkCreme);
+    background-color: var(--darkCreme);
+    color: var(--white);
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 5px 20px;
+    border-style: solid;
+    display: block;
+    box-shadow: none;
+}
+
+.brown-btn:hover:enabled {
     border-color: var(--brown);
     background-color: var(--brown);
     box-shadow: 0 3px 5px var(--darkBrown);
@@ -611,19 +644,19 @@ li.profile-info {
 }
 
 .username:before {
-    background-image: url("Images/user.svg");
+    background-image: url("images/user.svg");
 }
 
 .email:before {
-    background-image: url("Images/email.svg");
+    background-image: url("images/email.svg");
 }
 
 .date:before {
-    background-image: url("Images/calender.svg");
+    background-image: url("images/calender.svg");
 }
 
 .location:before {
-    background-image: url("Images/location.svg");
+    background-image: url("images/location.svg");
 }
 
 button.white-button:hover:enabled{

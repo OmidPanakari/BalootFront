@@ -1,8 +1,7 @@
-import Thumbnail from "./Images/thumbnail.png";
-import Star from "./Images/star.png";
+import Star from "../assets/images/star.png";
 import CommodityButton from "./CommodityButton";
 import {Rating} from "@mui/material";
-import {apiService} from "./services/apiService";
+import {apiService} from "../services/apiService";
 import {useEffect, useState} from "react";
 
 function CommodityInfo(props) {

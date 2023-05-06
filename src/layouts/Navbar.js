@@ -1,8 +1,8 @@
-import Logo from "./Logo";
-import Search from "./Search";
-import {DataContext} from "./App";
+import Logo from "../components/Logo";
+import Search from "../components/Search";
 import {useContext} from "react";
 import {useNavigate} from "react-router-dom";
+import {DataContext} from "../context/DataContext";
 
 function calculateItemsCount(buyList){
     let temp = 0;
@@ -23,7 +23,7 @@ function Navbar(props) {
                     {props.buttons &&
                         <div className="d-flex justify-content-between">
                             <div className="mx-2 d-flex align-items-center">
-                                <p className="item-title-text">{user.username}</p>
+                                <p className="item-title-text" onClick={() => navigate("/cart")}>{user.username}</p>
                             </div>
                             <div onClick={() => navigate("/cart")}
                                  className={`d-flex justify-content-between mx-2 px-3 py-2 cart-card${calculateItemsCount(user.buyList) === 0 ? "-empty" : ""}`}>
