@@ -1,8 +1,34 @@
 import Like from "./Images/like.svg"
 import Dislike from "./Images/dislike.svg"
+import {useContext, useEffect, useState} from "react";
+import {apiService} from "./services/apiService";
+import {AlertContext} from "./App";
 
 function Comment(props){
     const {comment} = props;
+    const [likes, setLikes] = useState({like: 0, dislike: 0})
+    const {sendAlert} = useContext(AlertContext);
+    useEffect(() => {
+        console.log(comment)
+        setLikes({like: comment.likes, dislike: comment.dislikes})
+    }, [])
+    async function like(){
+        const res = await apiService.postRequest("/users/votes", {commentId: comment.id, vote: 1})
+        if (res.success){
+            setLikes({like: res.data.likes, dislike: res.data.dislikes})
+        } else{
+            sendAlert(res.message)
+        }
+    }
+
+    async function dislike(){
+        const res = await apiService.postRequest("/users/votes", {commentId: comment.id, vote: -1})
+        if (res.success){
+            setLikes({like: res.data.likes, dislike: res.data.dislikes})
+        } else{
+            sendAlert(res.message)
+        }
+    }
     return(
         <div>
             <div className="d-flex align-items-center px-2 pt-2">
@@ -15,9 +41,9 @@ function Comment(props){
             </div>
             <div className="d-flex justify-content-end px-2 pb-3">
                 <span className="question-text mx-2">Is this comment helpful?</span>
-                <span className="like-text">{comment.likes} <img className="like" src={Like}
+                <span className="like-text">{likes.like} <img className="like" src={Like} onClick={like}
                                                    alt="like"/></span>
-                <span className="like-text">{comment.dislikes} <img className="like" src={Dislike}
+                <span className="like-text">{likes.dislike} <img className="like" src={Dislike} onClick={dislike}
                                                    alt="dislike"/></span>
             </div>
         </div>

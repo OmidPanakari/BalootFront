@@ -1,12 +1,13 @@
 import Thumbnail from "./Images/thumbnail.png"
 import CommodityButton from "./CommodityButton";
 import {useEffect, useState} from "react";
-function CartItem(props){
+
+function CartItem(props) {
     const [inStock, setInStock] = useState(0)
     useEffect(() => {
         setInStock(props.commodity.inStock)
-    }, [props.commodity])
-    return(
+    }, [props.commodity, props.inCart])
+    return (
         <tr className="shadow">
             <td scope="row"><img className="item-image" src={props.commodity.image} alt="commodity-image"/>
             </td>
@@ -17,9 +18,11 @@ function CartItem(props){
             <td className="rating-text">{props.commodity.rating}</td>
             <td className="remaining-text">{inStock}</td>
             <td>
-                <CommodityButton setInStock = {setInStock} count={props.inCart} commodity={props.commodity}/>
+                {!props.purchased ? <CommodityButton setInStock={setInStock} count={props.inCart}
+                                                    commodity={props.commodity}/> : props.inCart}
             </td>
         </tr>
     )
 }
+
 export default CartItem;

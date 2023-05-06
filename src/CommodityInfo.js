@@ -8,14 +8,18 @@ import {useEffect, useState} from "react";
 function CommodityInfo(props) {
     const {commodity, inCart} = props;
     const [userRating, setUserRating] = useState(0);
+    const [ratingData, setRatingData] = useState({rating: 0, rateCount: 0})
     const [inStock, setInStock] = useState(0)
     useEffect(() => {
         setInStock(props.commodity.inStock)
+        setRatingData({rating: props.commodity.rating, rateCount: props.commodity.rateCount})
     }, [props.commodity])
     const addRating = async () => {
         const response = await apiService.postRequest(`/commodities/${commodity.id}/ratings`, {rate: userRating});
         if (!response.success) {
             alert(response.message);
+        } else {
+            setRatingData({rating: response.data.rating, rateCount: response.data.rateCount})
         }
     }
     return (
@@ -29,11 +33,11 @@ function CommodityInfo(props) {
                     <h3 className="stock-text">{inStock} in stock</h3>
                     <div className="d-flex align-items-baseline">
                         <img className="rating" src={Star} alt="rate"/>
-                        <p className="filter-text">{commodity.rating}</p>
-                        <p className="subtitle mb-0">({commodity.rateCount})</p>
+                        <p className="filter-text">{ratingData.rating}</p>
+                        <p className="subtitle mb-0">({ratingData.rateCount})</p>
                     </div>
                 </div>
-                <h4 className="provider-text">by <a href="#">{commodity.providerName}</a></h4>
+                <h4 className="provider-text">by <a href={"/Provider/" + commodity.providerId}>{commodity.providerName}</a></h4>
                 <h4 className="category-text mb-2">Category(s)</h4>
                 <ul className="category-text">
                     {commodity.categories.map((cat) => {

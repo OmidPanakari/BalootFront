@@ -18,7 +18,7 @@ function Signup() {
                     password: event.target.password.value,
                     confirmPassword: event.target.passConfirm.value,
                     address: event.target.address.value,
-                    date: event.target.date.value
+                    birthDate: event.target.date.value
                 }
             );
             if(temp.data.success === true)
