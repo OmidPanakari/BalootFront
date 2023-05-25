@@ -2,10 +2,12 @@ import {Box, Modal} from "@mui/material";
 import {useContext, useState} from "react";
 import {apiService} from "../services/apiService";
 import {AlertContext} from "../context/AlertContext";
+import {DataContext} from "../context/DataContext";
 
 function BuyModal(props) {
     const {open, buyList, close} = props;
     const {sendAlert} = useContext(AlertContext);
+    const {setUser} = useContext(DataContext)
     const [discountCode, setDiscountCode] = useState("");
     const [discount, setDiscount] = useState(null);
 

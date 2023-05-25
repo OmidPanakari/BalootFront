@@ -42,11 +42,11 @@ function Provider(){
                         <div className="container provider-container my-5">
                             <div className="d-flex justify-content-center">
                                 <div>
-                                    <img className="provider-image w-100" alt="provider" src={provider.provider.image}/>
+                                    <img className="provider-image w-100" alt="provider" src={provider.image}/>
                                 </div>
                             </div>
-                            <div className="d-flex justify-content-end provider-date pe-2">Since {new Date(provider.provider.registryDate).getFullYear()}</div>
-                            <div className="provider-title">{provider.provider.name}</div>
+                            <div className="d-flex justify-content-end provider-date pe-2">Since {new Date(provider.registryDate).getFullYear()}</div>
+                            <div className="provider-title">{provider.name}</div>
                         </div>
                         <div className="row">
                             <h2 className="filter-text mt-5 mb-2">All provided commodities</h2>

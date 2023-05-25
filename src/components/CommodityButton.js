@@ -26,8 +26,10 @@ function CommodityButton(props){
 
     const addToCart = async (e) => {
         e.stopPropagation();
+        console.log("Ok Here")
         setStock((pre) => pre - 1);
         setCount((pre) => pre + 1);
+        props.setInStock((pre) => pre - 1);
         const resp = await apiService.putRequest("/users/cart", {
             commodityId: props.commodity.id,
             action: "add"
@@ -35,6 +37,7 @@ function CommodityButton(props){
         if (!resp.success) {
             setStock((pre) => pre + 1);
             setCount((pre) => pre - 1);
+            props.setInStock((pre) => pre + 1);
             sendAlert(resp.message);
         } else {
             await getCart();
@@ -45,6 +48,7 @@ function CommodityButton(props){
         e.stopPropagation();
         setStock((pre) => pre + 1);
         setCount((pre) => pre - 1);
+        props.setInStock((pre) => pre + 1);
         const resp = await apiService.putRequest("/users/cart", {
             commodityId: props.commodity.id,
             action: "remove"
@@ -52,6 +56,7 @@ function CommodityButton(props){
         if (!resp.success) {
             setStock((pre) => pre - 1);
             setCount((pre) => pre + 1);
+            props.setInStock((pre) => pre - 1);
             sendAlert(resp.message);
         } else {
             await getCart();
