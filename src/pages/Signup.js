@@ -1,16 +1,19 @@
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 function Signup() {
     const baseURL = "http://localhost:8080/users/";
     const [error, setError] = useState("")
     const navigate = useNavigate();
-    function handleSignup(event){
+    let passwordValue = "";
+
+    function handleSignup(event) {
         event.preventDefault()
-        async function SignupReq(){
+
+        async function SignupReq() {
             let temp = await axios.post(baseURL,
                 {
                     username: event.target.username.value,
@@ -21,14 +24,16 @@ function Signup() {
                     birthDate: event.target.date.value
                 }
             );
-            if(temp.data.success === true)
+            if (temp.data.success === true)
                 navigate("/login");
             else
                 setError(temp.data.message);
         }
+
         SignupReq();
 
     }
+
     return (
         <>
             <Navbar/>
@@ -42,15 +47,18 @@ function Signup() {
 
                                         <form className="pb-2" onSubmit={event => handleSignup(event)}>
 
-                                            <img className="pb-3 logo" src={require("../assets/images/Logo.png")} alt="logo"/>
+                                            <img className="pb-3 logo" src={require("../assets/images/Logo.png")}
+                                                 alt="logo"/>
                                             <p className="item-title-text pb-2">Sign up</p>
 
                                             <div
                                                 className="d-flex flex-row align-items-center justify-content-between mb-2">
                                                 <i className="profile-info username me-0 login-icon"></i>
                                                 <div className="form-outline flex-fill  mb-0">
-                                                    <input name="username" placeholder="Username" type="text" id="username"
-                                                           className="login-input form-control form-control-lg"/>
+                                                    <input name="username" placeholder="Username" type="text"
+                                                           id="username"
+                                                           className="login-input form-control form-control-lg"
+                                                           required/>
                                                 </div>
                                             </div>
 
@@ -59,7 +67,8 @@ function Signup() {
                                                 <i className="profile-info email me-0 login-icon"></i>
                                                 <div className="form-outline flex-fill  mb-0">
                                                     <input name="email" placeholder="Email" type="email" id="email"
-                                                           className="login-input form-control form-control-lg"/>
+                                                           className="login-input form-control form-control-lg"
+                                                           required/>
                                                 </div>
                                             </div>
 
@@ -67,8 +76,12 @@ function Signup() {
                                                 className="d-flex flex-row align-items-center justify-content-between mb-2">
                                                 <i className="bi-key-fill me-1 login-icon"></i>
                                                 <div className="form-outline flex-fill  mb-0">
-                                                    <input name="password" placeholder="Password" type="password" id="passwrod"
-                                                           className="login-input form-control form-control-lg"/>
+                                                    <input name="password" placeholder="Password" type="password"
+                                                           id="passwrod"
+                                                           className="login-input form-control form-control-lg"
+                                                           required
+                                                           onChange={event => passwordValue = event.target.value}
+                                                    />
                                                 </div>
                                             </div>
 
@@ -76,9 +89,18 @@ function Signup() {
                                                 className="d-flex flex-row align-items-center justify-content-between mb-2">
                                                 <i className="bi-lock-fill me-1 login-icon"></i>
                                                 <div className="form-outline flex-fill  mb-0">
-                                                    <input name="passConfirm" placeholder="Confirm Password" type="password"
+                                                    <input name="passConfirm" placeholder="Confirm Password"
+                                                           type="password"
                                                            id="confirm-password"
-                                                           className="login-input form-control form-control-lg"/>
+                                                           className="login-input form-control form-control-lg" required
+                                                           onChange={event => {
+                                                               if (passwordValue === event.target.value) {
+                                                                    event.target.setCustomValidity('')
+                                                               } else {
+                                                                   event.target.setCustomValidity('Password does not match')
+                                                               }
+                                                           }}
+                                                    />
                                                 </div>
                                             </div>
 
@@ -87,7 +109,8 @@ function Signup() {
                                                 <i className="profile-info date me-0 login-icon"></i>
                                                 <div className="form-outline flex-fill  mb-0">
                                                     <input name="date" type="date" id="birthdate"
-                                                           className="form-control form-control-lg login-input"/>
+                                                           className="form-control form-control-lg login-input"
+                                                           required/>
                                                 </div>
                                             </div>
 
@@ -96,7 +119,8 @@ function Signup() {
                                                 <i className="profile-info location me-0 login-icon"></i>
                                                 <div className="form-outline flex-fill  mb-0">
                                                     <input name="address" placeholder="Address" type="text" id="address"
-                                                           className="form-control form-control-lg login-input"/>
+                                                           className="form-control form-control-lg login-input"
+                                                           required/>
                                                 </div>
                                             </div>
 
