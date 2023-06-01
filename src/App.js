@@ -12,6 +12,8 @@ import Provider from "./pages/Provider";
 import {DataContext} from "./context/DataContext";
 import {AlertContext} from "./context/AlertContext";
 import NotFound from "./pages/NotFound";
+import OAuth from "./pages/OAuth";
+import UnProtected from "./components/UnProtected";
 
 function App() {
     const baseURLAuth = "http://localhost:8080/auth/";
@@ -55,8 +57,9 @@ function App() {
                                 <Route path={"Commodity/:id"} element={<Protected><Commodity/></Protected>}/>
                                 <Route path={"Provider/:id"} element={<Protected><Provider/></Protected>}/>
                                 <Route path={"Cart"} element={<Protected><Cart/></Protected>}/>
-                                <Route path={"Login"} element={<Login/>}/>
-                                <Route path={"Signup"} element={<Signup/>}/>
+                                <Route path={"oAuth"} element={<UnProtected><OAuth/></UnProtected>}/>
+                                <Route path={"Login"} element={<UnProtected><Login/></UnProtected>}/>
+                                <Route path={"Signup"} element={<UnProtected><Signup/></UnProtected>}/>
                             </Route>
                             <Route path="*" element={<NotFound/>}/>
                         </Routes>
