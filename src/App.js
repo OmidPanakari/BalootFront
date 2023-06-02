@@ -16,7 +16,6 @@ import OAuth from "./pages/OAuth";
 import UnProtected from "./components/UnProtected";
 
 function App() {
-    console.log("render")
     const baseURLAuth = "http://localhost:8080/auth/";
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState({})
