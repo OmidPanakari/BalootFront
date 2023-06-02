@@ -9,7 +9,7 @@ api.interceptors.response.use(
     (res) => res.data,
     (err) => {
         console.log(err);
-        window.location.reload();
+        //window.location.reload();
         return Promise.reject(err);
     }
 );

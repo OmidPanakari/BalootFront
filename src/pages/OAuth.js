@@ -1,33 +1,43 @@
-import {useNavigate, useParams} from "react-router-dom";
-import axios from "axios";
-import {useContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {useContext, useEffect} from "react";
 import {DataContext} from "../context/DataContext";
+import {apiService} from "../services/apiService";
+import {AlertContext} from "../context/AlertContext";
 
 function OAuth(){
-    const baseURL = "http://localhost:8080/users/oAuth";
-    const baseURLAuth = "http://localhost:8080/auth/";
+    const oAuthURL = "/users/oAuth";
+    const authUrl = "/auth/";
     const urlParams = new URLSearchParams(window.location.search);
     const navigate = useNavigate();
     const code = urlParams.get("code")
     const {user, setUser} = useContext(DataContext)
+    const {sendAlert} = useContext(AlertContext)
     async function OAuthRequest() {
-        let temp = await axios.post(baseURL,
+        let res = await apiService.postRequest(oAuthURL,
             {
                 code: code,
             }
         );
-        if(temp.data.success === true){
-            localStorage.setItem("token", temp.data.data)
-            let temp2 = await axios.get(baseURLAuth, {headers: {Authorization : localStorage.getItem("token")}});
-            if (temp2.data.success === true) {
-                setUser(temp2.data.data.data);
-
+        if(res.success === true){
+            localStorage.setItem("token", res.data)
+            let response = await apiService.getRequest(authUrl);
+            if (response.data.success === true) {
+                setUser(response.data.data, () => navigate("/"));
+            }
+            else {
+                sendAlert(response.data.message)
+                navigate("/login");
             }
         }
-        navigate("/");
+        else {
+            sendAlert(res.message)
+            navigate("/login");
+        }
     }
 
-    OAuthRequest();
+    useEffect(() => {
+        OAuthRequest();
+    }, [])
 }
 
 export default OAuth
